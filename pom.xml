@@ -4,6 +4,7 @@
     <groupId>pe.edu.ltmj</groupId>
     <artifactId>reactive-microservices-demo</artifactId>
     <version>0.1.0</version>
+    <packaging>jar</packaging>
     <name>reactive-microservices-demo</name>
 
     <properties>
@@ -14,14 +15,14 @@
 
     <dependencies>
         <!-- Spring dependencies -->
-        <dependency>
-            <!-- Import dependency management from Spring Boot -->
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-dependencies</artifactId>
-            <version>${spring-boot.version}</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
+        <!-- <dependency> -->
+        <!-- Import dependency management from Spring Boot -->
+        <!-- <groupId>org.springframework.boot</groupId> -->
+        <!-- <artifactId>spring-boot-dependencies</artifactId> -->
+        <!-- <version>${spring-boot.version}</version> -->
+        <!-- <type>pom</type> -->
+        <!-- <scope>import</scope> -->
+        <!-- </dependency> -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -35,7 +36,12 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jetty</artifactId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
             <version>${spring-boot.version}</version>
         </dependency>
 
@@ -51,13 +57,6 @@
         </dependency>
     </dependencies>
 
-    <repositories>
-        <repository>
-            <id>Spring milestones</id>
-            <url>http://repo.spring.io/milestone/</url>
-        </repository>
-    </repositories>
-
     <build>
         <plugins>
             <plugin>
@@ -65,12 +64,39 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.6.1</version>
                 <configuration>
-                    <source>1.9</source>
-                    <target>1.9</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <showDeprecation>true</showDeprecation>
                     <showWarnings>true</showWarnings>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <!-- <groupId>org.springframework.boot</groupId> -->
+                <!-- <artifactId>spring-boot-maven-plugin</artifactId> -->
+                <!-- <version>${spring-boot.version}</version> -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>1.5.9.RELEASE</version>
+                <configuration>
+                    <mainClass>pe.edu.ltmj.main.Main</mainClass>
+                    <layout>ZIP</layout>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
+
+    <repositories>
+        <repository>
+            <id>Spring milestones</id>
+            <url>http://repo.spring.io/milestone/</url>
+        </repository>
+    </repositories>
 </project>
